@@ -241,12 +241,35 @@ body {
 }
 
 .todo-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   margin-top: 18px;
   padding-top: 12px;
   border-top: 1px solid var(--border-color);
-  text-align: right;
   font-weight: 600;
   color: var(--text-color);
+}
+
+.clear-completed-btn {
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--item-color);
+  color: var(--danger-color);
+  padding: 8px 10px;
+  font: inherit;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.clear-completed-btn:hover {
+  background: var(--danger-hover-bg);
+  color: var(--danger-dark);
+}
+
+.clear-completed-btn:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
 }
 
 @media (max-width: 420px) {

@@ -7,6 +7,7 @@ const todoInput = document.getElementById('todo-input');
 const todoList = document.getElementById('todo-list');
 const emptyState = document.getElementById('empty-state');
 const remainingCount = document.getElementById('remaining-count');
+const clearCompletedButton = document.getElementById('clear-completed');
 const themeToggle = document.getElementById('theme-toggle');
 const filterButtons = document.querySelectorAll('.filter-btn');
 const THEME_STORAGE_KEY = 'todoListTheme';
@@ -77,7 +78,9 @@ function saveTodos() {
 // 更新底部未完成數量與篩選後的空白提示
 function updateSummary() {
   const remaining = todos.filter((todo) => !todo.completed).length;
+  const completed = todos.some((todo) => todo.completed);
   remainingCount.textContent = `未完成:${remaining} 項`;
+  clearCompletedButton.hidden = !completed;
 
   const visibleTodos = getVisibleTodos();
   const emptyMessages = {
@@ -181,6 +184,21 @@ todoInput.addEventListener('keydown', (event) => {
     event.preventDefault();
     addTodo();
   }
+});
+
+// 確認後清除所有已完成項目
+clearCompletedButton.addEventListener('click', () => {
+  if (!todos.some((todo) => todo.completed)) {
+    return;
+  }
+
+  if (!window.confirm('確定要清除所有已完成的待辦事項嗎？此操作無法復原。')) {
+    return;
+  }
+
+  todos = todos.filter((todo) => !todo.completed);
+  saveTodos();
+  renderTodos();
 });
 
 // 主題按鈕會保存使用者明確選擇
