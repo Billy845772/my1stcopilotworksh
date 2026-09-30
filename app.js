@@ -83,7 +83,7 @@ function updateSummary() {
   const emptyMessages = {
     all: '還沒有任何待辦事項,新增一個吧!',
     active: '沒有未完成的待辦事項。',
-    completed: '沒有已完成的待辦事項。',
+    completed: '目前沒有已完成的待辦事項。若剛取消勾選，該項目只是被篩選隱藏，並未刪除；切換至「全部」或「未完成」即可查看。',
   };
   emptyState.textContent = emptyMessages[currentFilter];
   emptyState.hidden = visibleTodos.length > 0;
